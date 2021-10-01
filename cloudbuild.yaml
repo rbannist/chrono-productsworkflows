@@ -1,0 +1,13 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  env:
+  - 'REGION=europe-west4'
+  - 'WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
+  - 'WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1/workflow.yaml'
+  args:
+  - gcloud
+  - workflows
+  - deploy
+  - ${WORKFLOW_NAME}
+  - --source=${WORKFLOW_YAML_LOCATION}
+  - --location=${REGION}
