@@ -2,15 +2,15 @@ steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
   env:
-  - 'WORKFLOW_REGION=europe-west4'
-  - 'WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
-  - 'WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1/workflow.yaml'
+  - '_WORKFLOW_REGION=europe-west4'
+  - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
+  - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1/workflow.yaml'
   args:
   - gcloud
   - workflows
   - deploy
-  - ${WORKFLOW_NAME}
-  - --source=${WORKFLOW_YAML_LOCATION}
-  - --location=${WORKFLOW_REGION}
+  - ${_WORKFLOW_NAME}
+  - --source=${_WORKFLOW_YAML_LOCATION}
+  - --location=${_WORKFLOW_REGION}
   - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
   - --labels=[sdlcstatus=production]
