@@ -1,0 +1,22 @@
+main:
+  params: [args]
+  steps:
+  - init:
+      assign:
+      - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+      - context: ${args.context}
+      - transaction_id: ${args.transactionId}
+      - transaction_time: ${args.transactionTime}
+      - firestore_collection: ${args.firestoreCollection}
+  - assign_product:
+      assign:
+      - product_id: ${args.productId}
+  - delete_document:
+      call: googleapis.firestore.v1.projects.databases.documents.delete
+      args:
+        name: ${"projects/" + project_id + "/databases/(default)/documents/" + firestore_collection + "/" + product_id}
+        currentDocument:
+            exists: true
+      result: delete_document_result
+  - the_end:
+      return: "SUCCESS"

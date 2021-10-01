@@ -11,21 +11,25 @@ main:
   - assign_product:
       assign:
       - product_id: ${args.productId}
-      - product_name: ${args.productName}
+      - product_description: ${args.productDescription}
   - update_document:
       call: googleapis.firestore.v1.projects.databases.documents.patch
       args:
         name: ${"projects/" + project_id + "/databases/(default)/documents/" + firestore_collection + "/" + product_id}
         currentDocument:
             exists: true
+        updateMask:
+            fieldPaths:
+                - '`@updated`'
+                - description
         body:
+            name: ${"projects/"+ project_id +"/databases/(default)/documents/"+ firestore_collection + "/" + product_id}
             fields:
-              "@updated":
-                stringValue: ${transaction_time}
-              name:
-                stringValue: ${product_name}
-            #name: ...
-            #updateTime: ...            
+                "@updated":
+                    stringValue: ${transaction_time}
+                description:
+                    stringValue: ${product_description}
+            #updateTime: ${transaction_time}
       result: update_document_result
   - get_document:
       call: googleapis.firestore.v1.projects.databases.documents.get
@@ -34,7 +38,7 @@ main:
       result: got
   - check:
       switch:
-      - condition: ${got.fields.name.stringValue == product_name}
+      - condition: ${got.fields.description.stringValue == product_description}
         next: the_end
   - failed:
       raise: ${"Got unexpected document"}
