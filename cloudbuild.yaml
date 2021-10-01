@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: 'gcloud'
+  #entrypoint: 'gcloud'
   env:
   - '_WORKFLOW_REGION=europe-west4'
   - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
