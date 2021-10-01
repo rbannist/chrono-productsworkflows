@@ -4,7 +4,7 @@ steps:
   env:
   - '_WORKFLOW_REGION=europe-west4'
   - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
-  - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1/workflow.yaml'
+  - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1.yaml'
   args:
   - gcloud
   - workflows
@@ -15,17 +15,17 @@ steps:
   - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
   #- --labels=[sdlcstatus=production]
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   #entrypoint: 'gcloud workflows'
-  env:
-  - '_WORKFLOW_REGION=europe-west4'
-  - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-deleteproduct1'
-  - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-deleteproduct1/workflow.yaml'
-  args:
-  - gcloud
-  - workflows
-  - deploy
-  - ${_WORKFLOW_NAME}
-  - --source=${_WORKFLOW_YAML_LOCATION}
-  - --location=${_WORKFLOW_REGION}
-  - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
+#  env:
+#  - '_WORKFLOW_REGION=europe-west4'
+#  - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-deleteproduct1'
+#  - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-deleteproduct1/workflow.yaml'
+#  args:
+#  - gcloud
+#  - workflows
+#  - deploy
+#  - ${_WORKFLOW_NAME}
+#  - --source=${_WORKFLOW_YAML_LOCATION}
+#  - --location=${_WORKFLOW_REGION}
+#  - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
