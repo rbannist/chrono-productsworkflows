@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  #entrypoint: 'gcloud'
+  #entrypoint: 'gcloud workflows'
   env:
   - '_WORKFLOW_REGION=europe-west4'
   - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
@@ -15,8 +15,8 @@ steps:
   - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
   #- --labels=[sdlcstatus=production]
 
-steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #entrypoint: 'gcloud workflows'
   env:
   - '_WORKFLOW_REGION=europe-west4'
   - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-deleteproduct1'
@@ -29,4 +29,3 @@ steps:
   - --source=${_WORKFLOW_YAML_LOCATION}
   - --location=${_WORKFLOW_REGION}
   - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
-
