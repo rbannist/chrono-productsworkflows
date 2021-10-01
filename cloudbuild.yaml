@@ -6,13 +6,14 @@ steps:
   - '_WORKFLOW_NAME=rbal-chrono-prod-wflowproductshandler-createproduct1'
   - '_WORKFLOW_YAML_LOCATION=wflowproductshandler-createproduct1.yaml'
   args:
-  - gcloud
-  - workflows
-  - deploy
-  - ${_WORKFLOW_NAME}
-  - --source=${_WORKFLOW_YAML_LOCATION}
-  - --location=${_WORKFLOW_REGION}
-  - --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
+  - gcloud workflows deploy wflowproductshandler-createproduct1 --source=wflowproductshandler-createproduct1.yaml --location=europe-west4 --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
+  #- gcloud
+  #- workflows
+  #- deploy
+  #- ${_WORKFLOW_NAME}
+  #- --source=${_WORKFLOW_YAML_LOCATION}
+  #- --location=${_WORKFLOW_REGION}
+  #- --service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com
   #- --labels=[sdlcstatus=production]
 
 #- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
