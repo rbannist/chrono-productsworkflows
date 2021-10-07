@@ -21,14 +21,48 @@ main:
       - offer_price: ${args.offerPrice}
       - offer_price_currency: ${args.offerPriceCurrency}
       - offer_urn: ${args.offerUrn}
-      - offers_array: ["${offer_id}"]
-      - offer_map:
-        - "@type": offer
-        - id: ${offer_id}
-        - parentProduct: ${product_id}
-        - price: ${offer_price}
-        - priceCurrency: ${offer_price_currency}
-        - urn: ${offer_urn}
+  - build_body1:
+      assign:
+      - body: {}
+      - body["@context"]:
+              stringValue: ${context}
+      - body["@created"]:
+              stringValue: ${transaction_time}
+      - body["@updated"]:
+              stringValue: ${transaction_time}
+      - body["@type"]:
+              stringValue: product
+      - body["id"]:
+              stringValue: ${product_id}
+      - body["name"]:
+              stringValue: ${product_name}
+      - body["description"]:
+              stringValue: ${product_description}
+      - body["imageUri"]:
+              stringValue: ${product_image_uri}
+      - body["urn"]:
+              stringValue: ${product_urn}
+  - build_body2:
+      assign:
+      - body["offers"]:
+            arrayValue:
+                    values:
+                        stringValue: ${offer_id}
+      - body[offer_id]:
+             mapValue:
+                  fields:
+                        "@type":
+                                stringValue: offer
+                        id:
+                                stringValue: ${offer_id}
+                        parentProduct:
+                                stringValue: ${product_id}
+                        price:
+                                stringValue: ${offer_price}
+                        priceCurrency:
+                                stringValue: ${offer_price_currency}
+                        urn:
+                                stringValue: ${offer_urn}
   - create_document:
       call: googleapis.firestore.v1.projects.databases.documents.createDocument
       args:
@@ -36,36 +70,8 @@ main:
         parent: ${"projects/" + project_id + "/databases/(default)/documents"}
         query:
           documentId: ${product_id}
-        body:
-          fields:
-            "@context":
-              stringValue: ${context}
-            "@created":
-              stringValue: ${transaction_time}
-            "@updated":
-              stringValue: ${transaction_time}
-            "@type":
-              stringValue: product
-            id:
-              stringValue: ${product_id}
-            name:
-              stringValue: ${product_name}
-            description:
-              stringValue: ${product_description}
-            imageUri:
-              stringValue: ${product_image_uri}
-            urn:
-              stringValue: ${product_urn}
-            #offers:
-            #  arrayValue: ["test"]
-            #${offer_id}:
-            #  mapValue: ${offer_map}
-            #    ("@type", offer)
-            #    (id, ${offer_id})
-            #    (parentProduct, ${product_id})
-            #    (price, ${offer_price})
-            #    (priceCurrency, ${offer_price_currency})
-            #    (urn, ${offer_urn})
+        body: 
+          fields: ${body}
   - get_document:
       call: googleapis.firestore.v1.projects.databases.documents.get
       args:
