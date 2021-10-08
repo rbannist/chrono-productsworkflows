@@ -4,6 +4,6 @@
   - 'workflows'
   - 'deploy'
   - 'rbal-chrono-prod-wflowproductshandler-deleteproduct1'
-  - '--source=wflowproductshandler-deleteproduct1/workflow.yaml'
+  - '--source=workflow.yaml'
   - '--location=europe-west4'
   - '--service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com'
