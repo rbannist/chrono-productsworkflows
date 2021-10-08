@@ -1,8 +1,0 @@
-steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        gcloud beta builds triggers create github --name="rmgpgab-chrono-prod-wflowproductshandler-createproduct1" --included-files "wflowproductshandler-createproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME --build-config="wflowproductshandler-createproduct1/cloudbuild.yaml" 
-        gcloud beta builds triggers create github --name="rmgpgab-chrono-prod-wflowproductshandler-deleteproduct1" --included-files "wflowproductshandler-deleteproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME --build-config="wflowproductshandler-deleteproduct1/cloudbuild.yaml" 
