@@ -1,0 +1,59 @@
+# Example JSON: {"context":"https://chrono.tk","firestoreCollection":"products-hardwarestore","offerId":"offe123456789123","offerPriceCurrency":"GBP","productId":"prod123456789123","transactionId":"023434543","transactionTime":"2021-10-08T14:52:00Z"}
+
+main:
+  params: [args]
+  steps:
+  - init:
+      assign:
+      - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+      - context: ${args.context}
+      - transaction_id: ${args.transactionId}
+      - transaction_time: ${args.transactionTime}
+      - firestore_collection: ${args.firestoreCollection}
+      - product_id: ${args.productId}
+      - offer_id: ${args.offerId}
+      - offer_price_currency: ${args.offerPriceCurrency}
+      - offer_fields: {}
+      - offer_fields[offer_id]:
+             mapValue:
+                  fields:
+                        priceCurrency:
+                                stringValue: ${offer_price_currency}
+  - update_document_map:
+      call: googleapis.firestore.v1.projects.databases.documents.patch
+      args:
+        name: ${"projects/" + project_id + "/databases/(default)/documents/" + firestore_collection + "/" + product_id + "?updateMask.fieldPaths=" + offer_id + ".priceCurrency"}
+        currentDocument:
+            exists: true
+        body:
+            name: ${"projects/"+ project_id +"/databases/(default)/documents/"+ firestore_collection + "/" + product_id}
+            fields: ${offer_fields}
+      result: update_document_map_result
+  - update_document_updatedfield:
+      call: googleapis.firestore.v1.projects.databases.documents.patch
+      args:
+        name: ${"projects/" + project_id + "/databases/(default)/documents/" + firestore_collection + "/" + product_id}
+        currentDocument:
+            exists: true
+        updateMask:
+            fieldPaths:
+                - '`@updated`'
+        body:
+            name: ${"projects/"+ project_id +"/databases/(default)/documents/"+ firestore_collection + "/" + product_id}
+            fields:
+                "@updated":
+                    stringValue: ${transaction_time}
+      result: update_document_updatedfield_result
+  - get_document:
+      call: googleapis.firestore.v1.projects.databases.documents.get
+      args:
+        name: ${"projects/" + project_id + "/databases/(default)/documents/" + firestore_collection + "/" + product_id}
+      result: got
+  - check:
+      switch:
+      - condition: ${got.fields.id.stringValue == product_id}
+        next: the_end
+  - failed:
+      raise: ${"Got unexpected document"}
+  - the_end:
+      return: "SUCCESS"
