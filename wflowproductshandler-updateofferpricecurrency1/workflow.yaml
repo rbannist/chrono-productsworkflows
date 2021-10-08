@@ -1,4 +1,4 @@
-# Example JSON: {"context":"https://chrono.tk","firestoreCollection":"products-hardwarestore","offerId":"offe123456789123","offerPriceCurrency":"GBP","productId":"prod123456789123","transactionId":"023434543","transactionTime":"2021-10-08T14:52:00Z"}
+# Example JSON: {"context":"https://chrono.tk","firestoreCollection":"products-hardwarestore","offerId":"offe123456789123","offerPriceCurrency":"GBP","productId":"prod123456789123","transactionId":"023434543","transactionTime":"2021-10-08T16:07:00Z"}
 
 main:
   params: [args]
