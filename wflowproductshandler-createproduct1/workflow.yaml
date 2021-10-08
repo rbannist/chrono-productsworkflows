@@ -1,4 +1,4 @@
-# Example JSON: {"context":"https://chrono.tk","firestoreCollection":"products-hardwarestore","offerId":"offe123456789123","offerPrice":"19.99","offerPriceCurrency":"GBP","offerUrn":"chrono.tk/products/new_product.html","productDescription":"A brand new product","productId":"prod123456789123","productImageUri":"https://chrono.tk/images/new_product.jpg","productName":"New product","productUrn":"chrono.tk/products/new_product.html","transactionId":"023434543","transactionTime":"2021-10-08T15:53:00Z"}
+# Example JSON: {"context":"https://chrono.tk","firestoreCollection":"products-hardwarestore","offerId":"offe123456789123","offerPrice":"19.99","offerPriceCurrency":"GBP","offerUrn":"chrono.tk/products/new_product.html","productDescription":"A brand new product","productId":"prod123456789123","productImageUri":"https://chrono.tk/images/new_product.jpg","productName":"New product","productUrn":"chrono.tk/products/new_product.html","transactionId":"023434543","transactionTime":"2021-10-08T16:04:00Z"}
 
 main:
   params: [args]
