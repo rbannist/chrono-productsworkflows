@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - 'gcloud'
+  - 'workflows'
+  - 'deploy'
+  - 'rbal-chrono-prod-wflowproductshandler-updateofferprice1'
+  - '--source=wflowproductshandler-updateofferprice1/workflow.yaml'
+  - '--location=europe-west4'
+  - '--service-account=rbal-chrono-prod-saproducthand@rbal-chrono-prod-prj1.iam.gserviceaccount.com'
