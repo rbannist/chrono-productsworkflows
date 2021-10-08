@@ -4,5 +4,5 @@ steps:
     args:
       - '-c'
       - |
-        cloud beta builds triggers create github build_wflowcreateproduct1 --included-files "wflowproductshandler-createproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME
-        cloud beta builds triggers create github build_wflowdeleteproduct1 --included-files "wflowproductshandler-deleteproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME
+        gcloud beta builds triggers create github build_wflowcreateproduct1 --included-files "wflowproductshandler-createproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME
+        gcloud beta builds triggers create github build_wflowdeleteproduct1 --included-files "wflowproductshandler-deleteproduct1/*" --repo-name=chrono-productsworkflows --repo-owner=rbannist --branch-pattern=$BRANCH_NAME
